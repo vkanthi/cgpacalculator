@@ -146,53 +146,6 @@ public class CalculationScreen extends JFrame {
         allSems.add(sem7Map);
         allSems.add(sem8Map);
 
-//        HashMap<String, ArrayList<JComboBox>> semBoxesAll = new HashMap<>();
-//
-//        perSemesterSubjectCredits.forEach((semName, semMap) -> {
-//            JComboBox[] boxesArr = new JComboBox[semMap.size()];
-//            ArrayList<JComboBox> list = new ArrayList<>();
-//            Collections.addAll(list, boxesArr);
-//            semBoxesAll.put(
-//                    semName,
-//                    list.stream()
-//                            .map(box -> new JComboBox(letterGrades))//
-//                            .collect(Collectors.toCollection(ArrayList::new))
-//            );
-//        });
-
-//        allSems.stream().map(sem -> {
-//
-//            JComboBox[] boxesArr = new JComboBox[sem.size()];
-//            ArrayList<JComboBox> list = new ArrayList<>();
-//            Collections.addAll(list, boxesArr);
-//            semBoxesAll.put(se list.stream().map(box -> new JComboBox(letterGrades)).collect(Collectors.toCollection(ArrayList::new));
-//
-//        })
-
-
-//        ArrayList<String> semNamesList = new ArrayList<>();
-//        Collections.addAll(semNamesList, semesterNames);
-//
-//        ArrayList<JPanel> panels = semNamesList.stream().map(semName -> {
-//            HashMap<String, Double> semSubjects = perSemesterSubjectCredits.get(semName);
-//            JPanel semJPanel = new JPanel();
-//            GridLayout layout = new GridLayout(semSubjects.keySet().size() + 2, 2);
-//            semJPanel.setLayout(layout);
-//            semJPanel.setBackground(Color.YELLOW);
-//            semJPanel.setName(semName);
-//
-//            ArrayList<JComboBox> semBoxes = semBoxesAll.get(semName);
-//
-//            semSubjects.keySet().stream().forEach(subject -> {
-//
-//                JLabel subjectLabel = new JLabel(subject);
-//                semJPanel.add(subjectLabel);
-//
-//            });
-//            return semJPanel;
-//        }).collect(Collectors.toCollection(ArrayList::new));
-
-
 
         //creating comboBox arrays and populating letterGrades into it
         JComboBox[] sem01cb = new JComboBox[8];
@@ -412,26 +365,6 @@ public class CalculationScreen extends JFrame {
         allSemesterPanels.add(sem07);
         allSemesterPanels.add(sem08);
 
-
-//        semBoxesAll.forEach((semName, semBoxes) ->
-//                semBoxes.forEach(box -> box.addActionListener(
-//                        new ActionListener() {
-//                            @Override
-//                            public void actionPerformed(ActionEvent event) {
-//
-//                                JComboBox<String> combo = (JComboBox<String>) event.getSource();
-//                                String gradeSelection = (String) combo.getSelectedItem();
-//                                String semesterName = combo.getParent().getName();
-//                                String subjectName = combo.getName();
-//                                Double intGrade = letterGradeMap.get(gradeSelection);
-//                                HashMap<String, Double> semGrades = resultsCGPA.getOrDefault(semesterName, new HashMap<>());
-//                                semGrades.put(subjectName, intGrade);
-//                                resultsCGPA.putIfAbsent(semesterName, semGrades);
-//
-//                            }
-//                        })
-//                )
-//        );
 
         //Creating an Action Listener for all the pull down menus.
         for (JComboBox[] sem : allSemesters) {
