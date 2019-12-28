@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
-
-
 /**
  *
  * @author Mala and Renganayagi
@@ -136,15 +134,16 @@ public class CalculationScreen extends JFrame {
     sem8Map.put("PROJECT WORK", 10.0);
     perSemesterSubjectCredits.put("SEM08", sem8Map);
 
-    Font font = new Font("Courier", Font.BOLD, 16);
 
-      // Creating calculate GPA and CGPA buttons for all tabs.
+
+      // Creating calculate GPA  CGPA and reset buttons for all tabs.
       JButton[] calculateGPA = new JButton[8];
-      JButton[] calculateCGPA = new JButton[8];
+      JButton calculateCGPA;
       JButton[] Reset8GPA = new JButton[6];
       JButton[] Reset9GPA = new JButton[2];
-      JButton[] closeProgram = new JButton[8];
       Border myRaisedBorder = (BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.PINK, Color.RED));
+      Font font = new Font("Courier", Font.BOLD, 16);
+      Font cgpaFont = new Font("Courier", Font.BOLD, 36);
       for (int m = 0; m < 8; m++) {
           calculateGPA[m] = new JButton("Calculate GPA");
           calculateGPA[m].setFont(font);
@@ -152,45 +151,37 @@ public class CalculationScreen extends JFrame {
           calculateGPA[m].setBackground(Color.BLUE);
           calculateGPA[m].setOpaque(true);
           calculateGPA[m].setBorder(myRaisedBorder);
-
-          calculateCGPA[m] = new JButton("Calculate CGPA");
-          calculateCGPA[m].setFont(font);
-          calculateCGPA[m].setForeground(Color.GREEN);
-          calculateCGPA[m].setBackground(Color.DARK_GRAY);
-          calculateCGPA[m].setOpaque(true);
-          calculateCGPA[m].setBorder(myRaisedBorder);
-
-
-
-          closeProgram[m] = new JButton("Close CGPA Calculator");
-          closeProgram[m].setFont(font);
-          closeProgram[m].setForeground(Color.BLUE);
-          closeProgram[m].setBackground(Color.YELLOW);
-          closeProgram[m].setOpaque(true);
-          closeProgram[m].setBorder(myRaisedBorder);
       }
     for (int m = 0; m < 6; m++) {
       Reset8GPA[m] = new JButton("Reset Grade Points");
       Reset8GPA[m].setFont(font);
-      Reset8GPA[m].setForeground(Color.BLUE);
-      Reset8GPA[m].setBackground(Color.YELLOW);
+      Reset8GPA[m].setForeground(Color.WHITE);
+      Reset8GPA[m].setBackground(Color.BLACK);
       Reset8GPA[m].setOpaque(true);
       Reset8GPA[m].setBorder(myRaisedBorder);
     }
     for (int m = 0; m < 2; m++) {
       Reset9GPA[m] = new JButton("Reset Grade Points");
       Reset9GPA[m].setFont(font);
-      Reset9GPA[m].setForeground(Color.BLUE);
-      Reset9GPA[m].setBackground(Color.YELLOW);
+      Reset9GPA[m].setForeground(Color.WHITE);
+      Reset9GPA[m].setBackground(Color.BLACK);
       Reset9GPA[m].setOpaque(true);
       Reset9GPA[m].setBorder(myRaisedBorder);
     }
     JButton Reset8thSemesterGPA = new JButton("Reset Grade Points");
     Reset8thSemesterGPA.setFont(font);
-    Reset8thSemesterGPA.setForeground(Color.BLUE);
-    Reset8thSemesterGPA.setBackground(Color.YELLOW);
+    Reset8thSemesterGPA.setForeground(Color.WHITE);
+    Reset8thSemesterGPA.setBackground(Color.BLACK);
     Reset8thSemesterGPA.setOpaque(true);
     Reset8thSemesterGPA.setBorder(myRaisedBorder);
+
+    calculateCGPA = new JButton("Calculate CGPA");
+    calculateCGPA.setFont(cgpaFont);
+    calculateCGPA.setForeground(Color.GREEN);
+    calculateCGPA.setBackground(Color.DARK_GRAY);
+    calculateCGPA.setOpaque(true);
+    calculateCGPA.setBorder(myRaisedBorder);
+    calculateCGPA.setPreferredSize(new Dimension(10, 10));
 
     // creating comboBox arrays and populating letterGrades into it
     JComboBox[] sem01cb = new JComboBox[sem1Map.size()];
@@ -228,6 +219,7 @@ public class CalculationScreen extends JFrame {
     ArrayList<JComboBox[]> Semesters8 = new ArrayList<>();
     Semesters8.add(sem08cb);
 
+    //Creating Subject Labels array
     JLabel[] sem01PaperLabel = new JLabel[8];
     JLabel[] sem02PaperLabel = new JLabel[8];
     JLabel[] sem03PaperLabel = new JLabel[8];
@@ -237,6 +229,7 @@ public class CalculationScreen extends JFrame {
     JLabel[] sem07PaperLabel = new JLabel[8];
     JLabel[] sem08PaperLabel = new JLabel[4];
 
+    //Creating All Panels
     JPanel sem01 = new JPanel();
     GridLayout sem01Layout = new GridLayout(10, 3);
     sem01.setLayout(sem01Layout);
@@ -273,10 +266,14 @@ public class CalculationScreen extends JFrame {
     sem07.setName(semesterNames[6]);
 
     JPanel sem08 = new JPanel();
-    GridLayout sem08Layout = new GridLayout(10, 3);
+    GridLayout sem08Layout = new GridLayout(9, 3);
     sem08.setLayout(sem08Layout);
     sem08.setName(semesterNames[7]);
 
+    JPanel CGPA = new JPanel(new GridLayout(1,1,1,1));
+    CGPA.setName("CGPA");
+
+    //Creating ComboBox and adding those into panels along with Subject Labels.
     for (int i = 0; i < sem1Map.size(); i++) {
       sem01cb[i] = new JComboBox(letterGrades);
       sem01cb[i].setName(sem01Subjects[i]);
@@ -288,9 +285,7 @@ public class CalculationScreen extends JFrame {
 
     }
     sem01.add(calculateGPA[0]);
-    sem01.add(calculateCGPA[0]);
     sem01.add(Reset8GPA[0]);
-    sem01.add(closeProgram[0]);
 
     for (int i = 0; i < sem2Map.size(); i++) {
       sem02cb[i] = new JComboBox(letterGrades);
@@ -302,10 +297,7 @@ public class CalculationScreen extends JFrame {
       sem02.add(sem02cb[i]);
     }
     sem02.add(calculateGPA[1]);
-    sem02.add(calculateCGPA[1]);
     sem02.add(Reset8GPA[1]);
-    sem02.add(closeProgram[1]);
-
 
     for (int i = 0; i < sem3Map.size(); i++) {
       sem03cb[i] = new JComboBox(letterGrades);
@@ -317,10 +309,7 @@ public class CalculationScreen extends JFrame {
       sem03.add(sem03cb[i]);
     }
     sem03.add(calculateGPA[2]);
-    sem03.add(calculateCGPA[2]);
     sem03.add(Reset8GPA[2]);
-    sem03.add(closeProgram[2]);
-
 
     for (int i = 0; i < sem4Map.size(); i++) {
       sem04cb[i] = new JComboBox(letterGrades);
@@ -332,10 +321,7 @@ public class CalculationScreen extends JFrame {
       sem04.add(sem04cb[i]);
     }
     sem04.add(calculateGPA[3]);
-    sem04.add(calculateCGPA[3]);
     sem04.add(Reset9GPA[0]);
-    sem04.add(closeProgram[3]);
-
 
     for (int i = 0; i < sem5Map.size(); i++) {
       sem05cb[i] = new JComboBox(letterGrades);
@@ -347,10 +333,7 @@ public class CalculationScreen extends JFrame {
       sem05.add(sem05cb[i]);
     }
     sem05.add(calculateGPA[4]);
-    sem05.add(calculateCGPA[4]);
     sem05.add(Reset8GPA[3]);
-    sem05.add(closeProgram[4]);
-
 
     for (int i = 0; i < sem6Map.size(); i++) {
       sem06cb[i] = new JComboBox(letterGrades);
@@ -362,9 +345,7 @@ public class CalculationScreen extends JFrame {
       sem06.add(sem06cb[i]);
     }
     sem06.add(calculateGPA[5]);
-    sem06.add(calculateCGPA[5]);
     sem06.add(Reset9GPA[1]);
-    sem06.add(closeProgram[5]);
 
 
     for (int i = 0; i < sem7Map.size(); i++) {
@@ -377,9 +358,7 @@ public class CalculationScreen extends JFrame {
       sem07.add(sem07cb[i]);
     }
     sem07.add(calculateGPA[6]);
-    sem07.add(calculateCGPA[6]);
     sem07.add(Reset8GPA[4]);
-    sem07.add(closeProgram[6]);
 
 
     for (int i = 0; i < sem8Map.size(); i++) {
@@ -392,21 +371,19 @@ public class CalculationScreen extends JFrame {
       sem08.add(sem08cb[i]);
     }
     sem08.add(calculateGPA[7]);
-    sem08.add(calculateCGPA[7]);
     sem08.add(Reset8thSemesterGPA);
-    sem08.add(closeProgram[7]);
+
+    CGPA.add ( calculateCGPA);
 
     // Creating an array of CGPA and GPA Buttons.
     ArrayList<JButton[]> allSemestersGPAButton = new ArrayList<>();
     allSemestersGPAButton.add(calculateGPA);
-    ArrayList<JButton[]> allSemestersCGPAButton = new ArrayList<>();
+    ArrayList<JButton> allSemestersCGPAButton = new ArrayList<>();
     allSemestersCGPAButton.add(calculateCGPA);
     ArrayList<JButton[]> allSemesters8GPAResetButton = new ArrayList<>();
     allSemesters8GPAResetButton.add(Reset8GPA);
     ArrayList<JButton[]> allSemesters9GPAResetButton = new ArrayList<>();
     allSemesters9GPAResetButton.add(Reset9GPA);
-    ArrayList<JButton[]> allSemestersCloseButton = new ArrayList<>();
-    allSemestersCloseButton.add(closeProgram);
 
     // Creating ArrayList for all the semester panels.
     ArrayList<JPanel> allSemesterPanels = new ArrayList<>();
@@ -512,9 +489,9 @@ public class CalculationScreen extends JFrame {
     }
 
     // Creating an Action Listener for CGPA Button.
-    for (JButton[] cgpa : allSemestersCGPAButton) {
+    for (JButton cgpa : allSemestersCGPAButton) {
       for (int i = 0; i <= 7; i++) {
-        cgpa[i].addActionListener(
+        cgpa.addActionListener(
             new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent event) {
@@ -527,7 +504,6 @@ public class CalculationScreen extends JFrame {
 
                   HashMap<String, Double> semGradesMax =
                       perSemesterSubjectCredits.get(semCompleted);
-
                   totalCredits += semGradesMax.values().stream().reduce(0d, Double::sum);
                   for (Map.Entry<String, Double> entry : semGrades.entrySet()) {
                     sumOfGradesReceived += semGradesMax.get(entry.getKey()) * entry.getValue();
@@ -538,13 +514,12 @@ public class CalculationScreen extends JFrame {
                 long roundedInt = Math.round(cgpa * 100);
                 double result = (double) roundedInt / 100;
                 currentButton.setText(
-                    "(Click to Calculate again)Your CGPA for this semester ="
-                        + String.valueOf(result));
+                    "Your CGPA is ="
+                        + String.valueOf(result) + " \n Click to Calculate again" );
               }
             });
       }
     }
-    // System.out.println(perSemesterSubjectCredits.keySet ().size ());
 
     // Creating an Action Listener for Reset GPA Button.
     for (JButton[] reset8all : allSemesters8GPAResetButton) {
@@ -562,9 +537,9 @@ public class CalculationScreen extends JFrame {
                         for (int l = 0; l <= 7; l++) {
                           cgp[l].setText("Calculate GPA");
                         }
-                        for (JButton[] ccgp : allSemestersCGPAButton) {
+                        for (JButton ccgp : allSemestersCGPAButton) {
                           for (int m = 0; m <= 7; m++) {
-                            ccgp[m].setText("Calculate CGPA");
+                            ccgp.setText("Calculate CGPA");
                           }
                         }
                       }
@@ -589,9 +564,9 @@ public class CalculationScreen extends JFrame {
                             for (int l = 0; l <8; l++) {
                               cgp[l].setText("Calculate GPA");
                             }
-                            for (JButton[] ccgp : allSemestersCGPAButton) {
+                            for (JButton ccgp : allSemestersCGPAButton) {
                               for (int m = 0; m <8; m++) {
-                                ccgp[m].setText("Calculate CGPA");
+                                ccgp.setText("Calculate CGPA");
                               }
                             }
                           }
@@ -613,9 +588,9 @@ public class CalculationScreen extends JFrame {
                         for (int l = 0; l <8; l++) {
                           cgp[l].setText("Calculate GPA");
                         }
-                        for (JButton[] ccgp : allSemestersCGPAButton) {
+                        for (JButton ccgp : allSemestersCGPAButton) {
                           for (int m = 0; m <8; m++) {
-                            ccgp[m].setText("Calculate CGPA");
+                            ccgp.setText("Calculate CGPA");
                           }
                         }
                       }
@@ -625,23 +600,7 @@ public class CalculationScreen extends JFrame {
               });
 
 
-
-
-
-
-      // Creating an Action Listener for Close Button.
-      for (JButton[] close : allSemestersCloseButton) {
-        for (int i = 0; i <= 7; i++) {
-          close[i].addActionListener(
-              new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent event) {
-                  System.exit(0);
-                }
-              });
-        }
-      }
-
+      // Creating a Tabbed Pane and adding all panels into it.
       JTabbedPane semesterPane =
           new JTabbedPane(JTabbedPane.TOP) {
             {
@@ -653,20 +612,21 @@ public class CalculationScreen extends JFrame {
               addTab(semesterNames[5], null, sem06, null);
               addTab(semesterNames[6], null, sem07, null);
               addTab(semesterNames[7], null, sem08, null);
+              addTab("CGPA",null,CGPA);
               setBounds(0, 0, 517, 291);
               setBackground(Color.YELLOW);
             }
           };
       getContentPane().add(semesterPane);
-      setSize(1700, 500);
+      setSize(1300, 500);
       setTitle("CGPA Calculation Screen");
       setLocationRelativeTo(null);
       // pack ();
-      setResizable(true);
+      setResizable(false);
       setVisible(true);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-        }
+  }
 }
 
 
